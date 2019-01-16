@@ -9,14 +9,26 @@
 </head>
 <body>
   <div id="app">
+
+    <!-- Interpolation and Filter -->	
     <h1>{{ title | toUpperCase() }}</h1>
+    <ul>
+	<!-- Loop -->
+	<li v-for="user in users">{{ user.name }}</li>
+    </ul>
+	
   </div>
 
   <script>
     var app = new Vue({
       el: "#app",
       data: {
-        title: "Hello World"
+        title: "Hello World",
+	users: [
+		{name:'Johnny Depp'},
+		{name:'Harry Potter'},
+		{name:'Jon Snow'}
+	]
       },
       filters: {
         toUpperCase(str){
@@ -27,5 +39,3 @@
   </script>
 </body>
 </html>
-
-  
