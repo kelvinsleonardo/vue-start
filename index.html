@@ -9,6 +9,9 @@
 </head>
 <body>
   <div id="app">
+    <!--Using components -->	
+    <nav-menu></nav-menu>
+    <nav-menu></nav-menu>
 
     <!-- Interpolation and Filter -->	
     <h1>{{ title | toUpperCase() }}</h1>
@@ -22,11 +25,26 @@
     </ul>
 
     <!-- Call method -->
-    <button@click="execute('Hello')">Send</button>		
+    <button @click="execute('Hello')">Send</button>		
 
   </div>
 
+    <!-- Register template component -->	
+    <template id="menu">
+	<ul>
+	   <li>Home</li>
+	   <li>About us</li>
+	   <li>Contact</li>
+	</ul>
+    </template>	
+
   <script>
+   // Define new component	
+   Vue.component('nav-menu', { 
+	// template: '<ul><li>Home</li><li>About us</li></ul>' // Inline
+	template: '#menu' // Inline
+   });
+
     var app = new Vue({
       el: "#app",
       data: { // Data available
@@ -81,8 +99,9 @@
 	},  				
       destroyed(){
 	console.log('destroyed');
-	}, 				
-    });
+	} 
+    });					
+
   </script>
 </body>
 </html>
