@@ -33,7 +33,7 @@
 
   <template id="list">
   	<ul class="list-group">
-		<li class="list-group-item" v-for="item in items">{{ item }}</li>
+		<li class="list-group-item" v-for="(item, index) in items">{{ index + ' - ' + item }}</li>
 	</ul>
   </template>
 
@@ -48,7 +48,8 @@
 	},
 	methods: {
 		submit(str){
-			eventBus.$emit('addEl', this.text);
+			this.$eventBus.$emit('addEl', this.text);
+			this.text = '';
 		}
 	}
    });
@@ -62,13 +63,14 @@
 	},
 	created(){
 		var ctrl = this;
-		eventBus.$on('addEl', function(ev){
+		this.$eventBus.$on('addEl', function(ev){
 			ctrl.items.push(ev)
 		});
 	}
    });
 
-  	var eventBus = new Vue();
+  	//var eventBus = new Vue();
+  	Vue.prototype.$eventBus = new Vue();
 
 
     var app = new Vue({
