@@ -42,14 +42,19 @@
     </template>	
 
     <template id="tp-parent">
-	<div>
+	<div style="background-color: red; padding: 10px">
 	   <p>Container Parent</p>	
-	   <c-child></c-child>
+	   <c-child style="background-color: yellow" 
+		    :text="'Text of the child'"
+		    @emit-child="receiveEmitChild"></c-child>
 	</div>
     </template>	
 
     <template id="tp-child">
-	<p>Container Child</p>	
+	<div>
+      	   <p>{{ text }}</p>
+	   <button @click.stop.prevent="emit()">Emit event to parent</button>
+	<div>
     </template>
 
   <script>
@@ -60,11 +65,28 @@
    });
 
   Vue.component('c-parent', { 
-	template: '#tp-parent'
+	template: '#tp-parent',
+	methods: {
+		receiveEmitChild(index){
+			console.log("Received by chield");
+		}
+	}
    });
 
   Vue.component('c-child', { 
-	template: '#tp-child'
+	template: '#tp-child',
+//	props: ['text']
+	props: {
+		text: {
+			type: String,
+			required: true
+		}
+	},
+	methods: {
+		emit(index){
+			this.$emit('emit-child', index);
+		}
+	}
    });
 
     var app = new Vue({
