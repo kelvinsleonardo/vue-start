@@ -16,7 +16,10 @@
 	<!-- Loop -->
 	<li v-for="user in users">{{ user.name }}</li>
     </ul>
-	
+
+    <!-- Call method -->
+    <button@click="execute('Hello')">Send</button>		
+
   </div>
 
   <script>
@@ -30,6 +33,11 @@
 		{name:'Jon Snow'}
 	]
       },
+      methods:{
+	execute(param){
+	  console.log(param);
+	}
+      },	
       filters: {
         toUpperCase(str){
           return str.toUpperCase();
