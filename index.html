@@ -9,7 +9,7 @@
 </head>
 <body>
   <div id="app">
-    <h1>{{ title }}</h1>
+    <h1>{{ title | toUpperCase() }}</h1>
   </div>
 
   <script>
@@ -17,6 +17,11 @@
       el: "#app",
       data: {
         title: "Hello World"
+      },
+      filters: {
+        toUpperCase(str){
+          return str.toUpperCase();
+        }
       }
     });
   </script>
