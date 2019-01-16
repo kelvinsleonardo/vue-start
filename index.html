@@ -27,6 +27,9 @@
     <!-- Call method -->
     <button @click="execute('Hello')">Send</button>		
 
+    <!-- Component parent and child-->	
+    <c-parent></c-parent>	
+
   </div>
 
     <!-- Register template component -->	
@@ -38,11 +41,30 @@
 	</ul>
     </template>	
 
+    <template id="tp-parent">
+	<div>
+	   <p>Container Parent</p>	
+	   <c-child></c-child>
+	</div>
+    </template>	
+
+    <template id="tp-child">
+	<p>Container Child</p>	
+    </template>
+
   <script>
    // Define new component	
    Vue.component('nav-menu', { 
 	// template: '<ul><li>Home</li><li>About us</li></ul>' // Inline
-	template: '#menu' // Inline
+	template: '#menu'
+   });
+
+  Vue.component('c-parent', { 
+	template: '#tp-parent'
+   });
+
+  Vue.component('c-child', { 
+	template: '#tp-child'
    });
 
     var app = new Vue({
