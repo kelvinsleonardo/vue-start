@@ -12,6 +12,10 @@
 
     <!-- Interpolation and Filter -->	
     <h1>{{ title | toUpperCase() }}</h1>
+
+    <!-- Using computed -->		
+    <h2>{{ subtitle }}</h2>	
+
     <ul>
 	<!-- Loop -->
 	<li v-for="user in users">{{ user.name }}</li>
@@ -25,7 +29,7 @@
   <script>
     var app = new Vue({
       el: "#app",
-      data: {
+      data: { // Data available
         title: "Hello World",
 	users: [
 		{name:'Johnny Depp'},
@@ -33,17 +37,30 @@
 		{name:'Jon Snow'}
 	]
       },
-      methods:{
+      methods:{ // Declare methods
 	execute(param){
-	  console.log(param);
+	  console.log(param); 
 	}
       },	
-      filters: {
+      filters: { // Declare filters
         toUpperCase(str){
           return str.toUpperCase();
         }
-      }
+      },
+      watch:{ // Detect changes in variable
+	title(newValue, oldValue){
+	  console.log('newValue',newValue);
+	  console.log('oldValue',oldValue);
+	}
+      },
+      computed: { // Runs whenever you have changes
+	subtitle(){
+	  return this.title + ' | Lorem ipsum ';	
+	}
+      }		
     });
   </script>
 </body>
 </html>
+
+  
